@@ -1,4 +1,8 @@
 ***
+<img src="./Note 15 Mar 2025-rotated.jpg" alt="Rotated Note" />
+
+
+***
 
 <div>
     <a href="https://www.loom.com/share/38d9d596ffeb4ef0b344319f4caac600" target="_blank">
