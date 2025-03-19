@@ -1,10 +1,52 @@
 # **📌 End To End Project to Consume Real-Time Logs of Multiple Systems and IOT Sensor data readings Using Flume, Kafka, MySQL & Looker**
 
 ***
+
 ## **Architechture of the Project**
 
-<img src="./Note 15 Mar 2025-rotated.jpg" alt="Rotated Note" />
+```mermaid
+graph TD
+    subgraph GCP_VM1 [GCP VM]
+        subgraph Log Sources
+            A1[Network Logs] -->|Flume| F1
+            A2[App Logs] -->|Flume| F1
+            A3[Security Logs] -->|Flume| F1
+        end
+        subgraph Kafka Producer
+            IOT[IoT Sensor Simulator] -->|Kafka Producer| F2[IoT Sensor Topic]
+        end
+        F1[Flume] -->|Kafka Producer| B1[Kafka Broker]
+        B1 -.->|Zookeeper| ZK[Zookeeper]
+        B1 -->|Network Logs Topic| T1[Kafka Topic 1]
+        B1 -->|App Logs Topic| T2[Kafka Topic 2]
+        B1 -->|Security Logs Topic| T3[Kafka Topic 3]
+        B1 -->|IoT Sensor Topic| F2
+    end
 
+    subgraph External_Browser1 [External Browser]
+        K1[Kafka Consumer Group 1] --> P1[Processed Data 1]
+        K2[Kafka Consumer Group 2] --> P2[Processed Data 2]
+        K3[Kafka Consumer Group 3] --> P3[Processed Data 3]
+    end
+
+    subgraph GCP_VM2 [GCP VM]
+        OLTP[MySQL OLTP Database]
+        FW[MySQL Firewall Rules] --> OLTP
+        P1 -->|Stored in MySQL| OLTP
+        P2 -->|Stored in MySQL| OLTP
+        P3 -->|Stored in MySQL| OLTP
+    end
+
+    subgraph External_Browser2 [External Browser]
+        R[Looker Report]
+    end
+
+    T1 -->|Kafka Topics| K1
+    T2 -->|Kafka Topics| K2
+    T3 -->|Kafka Topics| K3
+    F2 -->|Kafka Topics| K1
+    OLTP -->|Data for Reports| R
+```
 
 ***
 ## **Demo of the Project**
