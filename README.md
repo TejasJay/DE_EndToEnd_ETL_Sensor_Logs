@@ -1,4 +1,4 @@
-# **📌 End To End Project to Consume Real-Time Logs of Multiple Systems and IOT Sensor data readings Using Flume, Kafka, MySQL & Looker**
+# **End To End Project to Consume Real-Time Logs of Multiple Systems and IOT Sensor data readings Using Flume, Kafka, MySQL & Looker**
 
 ***
 
