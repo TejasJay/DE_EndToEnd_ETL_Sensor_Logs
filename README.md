@@ -3,7 +3,6 @@
 ***
 
 ## **Architechture of the Project**
-
 ```mermaid
 graph TD
     subgraph GCP_VM1 [GCP VM]
@@ -24,29 +23,31 @@ graph TD
     end
 
     subgraph External_Browser1 [External Browser]
-        K1[Kafka Consumer Group 1] --> P1[Processed Data 1]
-        K2[Kafka Consumer Group 2] --> P2[Processed Data 2]
-        K3[Kafka Consumer Group 3] --> P3[Processed Data 3]
-    end
-
-    subgraph GCP_VM2 [GCP VM]
-        OLTP[MySQL OLTP Database]
-        FW[MySQL Firewall Rules] --> OLTP
-        P1 -->|Stored in MySQL| OLTP
-        P2 -->|Stored in MySQL| OLTP
-        P3 -->|Stored in MySQL| OLTP
+        K1[Kafka Consumer Log 1] --> P1[Processed Log Data 1]
+        K2[Kafka Consumer Log 2] --> P2[Processed Log Data 2]
+        K3[Kafka Consumer Log 3] --> P3[Processed Log Data 3]
+        K4[Kafka Consumer IoT] --> P4[Processed IoT Data]
     end
 
     subgraph External_Browser2 [External Browser]
         R[Looker Report]
     end
 
+    subgraph GCP_VM2 [GCP VM]
+        OLTP[MySQL OLTP Database]
+        FW[MySQL Firewall Rules] --> OLTP
+        P4 -->|Stored in MySQL| OLTP
+    end
+
     T1 -->|Kafka Topics| K1
     T2 -->|Kafka Topics| K2
     T3 -->|Kafka Topics| K3
-    F2 -->|Kafka Topics| K1
+    F2 -->|Kafka Topics| K4
     OLTP -->|Data for Reports| R
+
+
 ```
+
 
 ***
 ## **Demo of the Project**
