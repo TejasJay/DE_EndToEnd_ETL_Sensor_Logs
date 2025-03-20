@@ -43,7 +43,7 @@ graph TD
     T2 -->|Kafka Topics| K2
     T3 -->|Kafka Topics| K3
     F2 -->|Kafka Topics| K4
-    OLTP -->|Data for Reports| R
+    OLTP -->|Real Time Data for Reports| R
 
 
 ```
